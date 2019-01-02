@@ -1,1 +1,1 @@
-export { default } from './src/cquery';
+module.exports = require('./src/cquery');

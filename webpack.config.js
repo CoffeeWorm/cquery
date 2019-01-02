@@ -5,7 +5,7 @@ module.exports = {
   output: {
     filename: 'cquery.js',
     path: path.join(__dirname, '/dist'),
-    library: 'util',
+    library: 'cquery',
     libraryTarget: 'umd',
     libraryExport: 'default'
   },
