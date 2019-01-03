@@ -16,7 +16,7 @@ class Cache {
         .send();
     });
   }
-  format(keyValue) {
+  format() {
     let result = '';
     let contentType = this.headers
       ? this.headers['Content-Type'] ||
@@ -31,11 +31,11 @@ class Cache {
     }
 
     if (/application\/x-www-form-urlencoded/.test(contentType)) {
-      Object.keys(keyValue).forEach(item => {
-        result += `${encodeURI(item)}=${encodeURI(keyValue[item]) || ''}&`;
+      Object.keys(this.data).forEach(item => {
+        result += `${encodeURI(item)}=${encodeURI(this.data[item]) || ''}&`;
       });
+      this.data = result.substr(0, result.length - 1);
     }
-    this.data = result.substr(0, result.length - 1);
     return this.data;
   }
   onreadystatechange(rel, rej) {
@@ -71,7 +71,7 @@ class Cache {
   send() {
     this.format();
     this.data === undefined && (this.data = null);
-    this.xhr.send(this.data);
+    this.xhr.send(JSON.stringify(this.data));
     return this;
   }
   open() {
