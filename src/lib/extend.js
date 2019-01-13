@@ -1,13 +1,15 @@
+import isUtils from './isUtil';
+
 export default function extend(...items) {
   let tar = items[0];
-  if (!this.isObject(tar)) {
+  if (!isUtils.isObject(tar)) {
     return {};
   }
   items.forEach(item => {
     if (item === tar) {
       return;
     }
-    if (!this.isObject(item)) {
+    if (!isUtils.isObject(item)) {
       throw new Error(tar + ' is not a Object');
     }
     Object.keys(item).forEach(it => {
