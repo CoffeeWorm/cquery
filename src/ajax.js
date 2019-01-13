@@ -40,18 +40,18 @@ class Cache {
     return res;
   }
   normalizeBody() {
-    let result = '';
+    let result = '', data = this.data || '';
     let contentType =
       this.headers[DEFAULT_CONTYPE_TYPE_NAME] || 'application/json';
     switch (contentType) {
       case /application\/json/.test(contentType):
-        result = JSON.stringify(this.data);
+        result = JSON.stringify(data);
         break;
       case /application\/x-www-form-urlencoded/.test(contentType):
-        result = encodeQuery(this.data);
+        result = encodeQuery(data);
         break;
       default:
-        result = this.data.toString();
+        result = data;
         break;
     }
 

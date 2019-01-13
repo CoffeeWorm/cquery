@@ -12,7 +12,7 @@ const types = [
 const isUtils = {};
 types.forEach(type => {
   isUtils[`is${type}`] = arg => {
-    return Object.prototype.toString.call(arg);
+    return Object.prototype.toString.call(arg) === `[object ${type}]`;
   };
 });
 
