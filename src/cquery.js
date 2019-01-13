@@ -1,4 +1,6 @@
 import ajax from './ajax';
+import isUtils from './lib/isUtil';
+import extend from './lib/extend';
 let _ = {
   $(selector, node) {
     if (document.querySelector) {
@@ -8,48 +10,6 @@ let _ = {
       selector = selector.match(/^\.|#/) ? selector.slice(1) : selector;
       return (node || document).getElementsByTagName(selector)[0];
     }
-  },
-  extend(...items) {
-    let tar = items[0];
-    if (!this.isObject(tar)) {
-      return {};
-    }
-    items.forEach(item => {
-      if (item === tar) {
-        return;
-      }
-      if (!this.isObject(item)) {
-        throw new Error(tar + ' is not a Object');
-      }
-      Object.keys(item).forEach(it => {
-        tar[it] = item[it];
-      });
-    });
-    return tar;
-  },
-  isArray(arg) {
-    return this.toString(arg) === '[object Array]';
-  },
-  isObject(arg) {
-    return this.toString(arg) === '[object Object]';
-  },
-  isBoolean(arg) {
-    return this.toString(arg) === '[object Boolean]';
-  },
-  isNumber(arg) {
-    return this.toString(arg) === '[object Number]';
-  },
-  isString(arg) {
-    return this.toString(arg) === '[object String]';
-  },
-  isNull(arg) {
-    return this.toString(arg) === '[object Null]';
-  },
-  isUndefined(arg) {
-    return this.toString(arg) === '[object Undefined]';
-  },
-  isFunction(arg) {
-    return this.toString(arg) === '[object Function]';
   },
   toString: Function.prototype.call.bind(Object.prototype.toString),
   hasClass(node, className) {
@@ -77,8 +37,8 @@ let _ = {
     }
   },
   html2node(str) {
-    str = str.trim().replace(/(\r)|(\n)/g, '');
     const el = document.createElement('div');
+    str = str.trim().replace(/(\r)|(\n)|(\s)/g, '');
     el.innerHTML = str;
     return el.childNodes[0];
   },
@@ -114,7 +74,9 @@ let _ = {
     });
     return template;
   },
-  ajax
+  ajax,
+  extend,
+  ...isUtils
 };
 
 export default _;
