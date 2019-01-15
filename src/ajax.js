@@ -9,7 +9,7 @@ class Cache {
   /**
    * constructor
    * @param {Object} options                  - XHR配置
-   * @param {String} options.method           - XHR请求方法，默认GET 
+   * @param {String} options.method           - XHR请求方法，默认GET
    * @param {Boolean} options.withCredentials - XHR配置cookie, cors适用,不设置不配置
    * @param {Object} options.headers          - XHR请求头，用法 { '<request header>': 'header content' }
    * @param {String} options.url              - XHR请求API, 比有
@@ -33,14 +33,25 @@ class Cache {
     });
   }
   normalizeQuery() {
+    if (!this.query) {
+      return this.url;
+    }
+
     let res = '';
+    let reg = /^(\S+?)(\?\S*)?$/;
+    let urlInfo = reg.exec(this.url);
+    let path = urlInfo[1];
+    let query = urlInfo[2];
+
     if ((this.method || 'get').toLowerCase() === 'get') {
       res = encodeQuery(this.query || {});
     }
-    return res;
+    res = query && query.length > 1 ? query + '&' + res : '?' + res;
+    return path + res;
   }
   normalizeBody() {
-    let result = '', data = this.data || '';
+    let result = '',
+      data = this.data || '';
     let contentType =
       this.headers[DEFAULT_CONTYPE_TYPE_NAME] || 'application/json';
     switch (contentType) {
@@ -94,7 +105,7 @@ class Cache {
   open() {
     this.xhr.open(
       this.method || 'get',
-      this.url + this.normalizeQuery(this.query),
+      this.normalizeQuery(),
       this.async || true
     );
     return this;
