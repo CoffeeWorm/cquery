@@ -54,7 +54,7 @@ class Cache {
       data = this.data || '';
     let contentType =
       this.headers[DEFAULT_CONTYPE_TYPE_NAME] || 'application/json';
-    switch (contentType) {
+    switch (true) {
       case /application\/json/.test(contentType):
         result = JSON.stringify(data);
         break;
