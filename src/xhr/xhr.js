@@ -2,9 +2,9 @@ import isUtil from '../lib/isutil';
 import normalizeProperty from '../lib/normalizeproperty';
 import encodeQuery from '../lib/encodequery';
 import extend from '../lib/extend';
-import DEFAULT_CONTYPE_TYPE_NAME from './default_configration';
+import { DEFAULT_CONTYPE_TYPE_NAME } from './default_configration';
 import defaultConfig from './default_configration';
-import MIME from './default_configration';
+import { MIME } from './default_configration';
 
 class XHR {
   /**
@@ -23,7 +23,7 @@ class XHR {
     }
     extend(this, defaultConfig, config);
 
-    normalizeProperty(this.headers || {}, DEFAULT_CONTYPE_TYPE_NAME);
+    normalizeProperty(this.headers, DEFAULT_CONTYPE_TYPE_NAME);
     this.xhr = new XMLHttpRequest();
     return new Promise((rel, rej) => {
       this.xhr.onreadystatechange = this.onreadystatechange(rel);
