@@ -1,4 +1,4 @@
-import ajax from './ajax';
+import ajax from './xhr/ajax';
 import isUtil from './lib/isutil';
 import extend from './lib/extend';
 let _ = {
