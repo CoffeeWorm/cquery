@@ -1,7 +1,7 @@
-import isUtils from './isUtil';
+import isUtil from './isutil';
 
 export default function normalizeProperties(obj, name) {
-  if (!isUtils.isObject(obj)) {
+  if (!isUtil.isObject(obj)) {
     throw new Error('First parameter is must be a object!');
   }
   Object.keys(obj).forEach(item => {

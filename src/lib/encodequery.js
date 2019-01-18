@@ -1,6 +1,6 @@
-import isUtils from './isUtil';
+import isUtil from './isutil';
 export default function encodeQuery(obj){
-  if (!isUtils.isObject(obj)) {
+  if (!isUtil.isObject(obj)) {
     throw new Error('The parameter is must be a object');  
   }
   let result = '';

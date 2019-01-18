@@ -9,11 +9,11 @@ const types = [
   'Undefined',
   'Symbol'
 ];
-const isUtils = {};
+const isUtil = {};
 types.forEach(type => {
-  isUtils[`is${type}`] = arg => {
+  isUtil[`is${type}`] = arg => {
     return Object.prototype.toString.call(arg) === `[object ${type}]`;
   };
 });
 
-export default isUtils;
+export default isUtil;

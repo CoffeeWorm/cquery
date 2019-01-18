@@ -1,16 +1,16 @@
-import isUtils from './isUtil';
+import isUtil from './isutil';
 
 export default function extend(...items) {
   let tar = items[0];
-  if (!isUtils.isObject(tar)) {
+  if (!isUtil.isObject(tar)) {
     return {};
   }
   items.forEach(item => {
     if (item === tar) {
       return;
     }
-    if (!isUtils.isObject(item)) {
-      throw new Error(tar + ' is not a Object');
+    if (!isUtil.isObject(item)) {
+      throw new TypeError(tar + ' is not a object');
     }
     Object.keys(item).forEach(it => {
       tar[it] = item[it];

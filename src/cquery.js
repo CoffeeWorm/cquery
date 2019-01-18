@@ -1,5 +1,5 @@
 import ajax from './ajax';
-import isUtils from './lib/isUtil';
+import isUtil from './lib/isutil';
 import extend from './lib/extend';
 let _ = {
   $(selector, node) {
@@ -82,7 +82,7 @@ let _ = {
   },
   ajax,
   extend,
-  ...isUtils
+  ...isUtil
 };
 
 export default _;

@@ -1,5 +1,5 @@
 const path = require('path');
-let env = 'development' === process.env.NODE_ENV;
+
 module.exports = {
   entry: './index.js',
   output: {
@@ -9,7 +9,7 @@ module.exports = {
     libraryTarget: 'umd',
     libraryExport: 'default'
   },
-  devtool: env ? 'eval-source-map' : 'source-map',
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -24,6 +24,11 @@ module.exports = {
         }
       }
     ]
+  },
+  resolve: {
+    alias: {
+      '@': path.join(__dirname, './src')
+    }
   },
   plugins: [],
   node: false,
