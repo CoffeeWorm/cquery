@@ -6,7 +6,7 @@ import extend from '../lib/extend';
 import { DEFAULT_CONTYPE_TYPE_NAME } from './default_configration';
 import defaultConfig from './default_configration';
 import { MIME } from './default_configration';
-
+import isSupportXHRUpload from '../lib/isSupportXHRUpload';
 class XHR {
   /**
    * constructor
@@ -78,9 +78,6 @@ class XHR {
       }
     };
   }
-  isSupportUpload() {
-    return isUtil.isObject(this.xhr.upload);
-  }
   setConfig() {
     this.withCredentials && (this.xhr.withCredentials = true);
     this.onDownloadProgress &&
@@ -90,7 +87,7 @@ class XHR {
     } catch (e) {
       console.error(e);
     }
-    this.isSupportUpload() &&
+    isSupportXHRUpload() &&
       this.onUploadProgress &&
       this.xhr.upload.addEventListener('progress', this.onUploadProgress);
     return this;

@@ -1,6 +1,5 @@
 import XHR from './xhr';
-import isUtil from '../lib/isutil';
-
+import isSupportUpload from '../lib/isSupportXHRUpload';
 let ajax = function(config) {
   return new XHR(config);
 };
@@ -12,5 +11,5 @@ let ajax = function(config) {
     return new XHR(config);
   };
 });
-ajax.isSupportUpload = () => isUtil.isObect(new XMLHttpRequest().upload);
+ajax.isSupportUpload = isSupportUpload;
 export default ajax;

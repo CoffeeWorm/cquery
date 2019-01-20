@@ -1,6 +1,8 @@
 import ajax from './xhr/ajax';
 import isUtil from './lib/isutil';
 import extend from './lib/extend';
+import toString from './lib/tostring';
+
 let _ = {
   $(selector, node) {
     if (document.querySelector) {
@@ -11,7 +13,6 @@ let _ = {
       return (node || document).getElementsByTagName(selector)[0];
     }
   },
-  toString: Function.prototype.call.bind(Object.prototype.toString),
   hasClass(node, className) {
     const pattern = new RegExp(className);
     return pattern.test(node.className);
@@ -80,6 +81,7 @@ let _ = {
     });
     return template;
   },
+  toStr: toString,
   ajax,
   extend,
   ...isUtil
