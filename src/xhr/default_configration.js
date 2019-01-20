@@ -22,5 +22,4 @@ let defaultConfig = {
   data: {},
   query: {}
 };
-defaultConfig.headers[DEFAULT_CONTYPE_TYPE_NAME] = MIME.JSON;
 export default defaultConfig;

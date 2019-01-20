@@ -1,3 +1,1 @@
-export default function toString(){
-  return Function.prototype.call.bind(Object.prototype.toString);
-}
+export default Function.prototype.call.bind(Object.prototype.toString);
