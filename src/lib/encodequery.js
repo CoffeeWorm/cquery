@@ -1,11 +1,15 @@
 import isUtil from './isutil';
-export default function encodeQuery(obj){
+
+export default function encodeQuery(obj) {
   if (!isUtil.isObject(obj)) {
-    throw new Error('The parameter is must be a object');  
+    throw new Error('The parameter is must be a object');
   }
-  let result = '';
+  let result = [];
   Object.keys(obj).forEach(item => {
-    result += `${encodeURI(item)}=${encodeURI(obj[item]) || ''}&`;
+    let str = !isUtil.isUndefined(obj[item])
+      ? `${encodeURI(item)}=${encodeURI(obj[item])}`
+      : `${encodeURI(item)}`;
+    result.push(str);
   });
-  return result.substr(0, result.length - 1);
+  return result.join('&');
 }

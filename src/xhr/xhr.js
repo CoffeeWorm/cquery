@@ -1,6 +1,7 @@
 import isUtil from '../lib/isutil';
 import normalizeProperty from '../lib/normalizeproperty';
 import encodeQuery from '../lib/encodequery';
+import decodeQuery from '../lib/decodequery';
 import extend from '../lib/extend';
 import { DEFAULT_CONTYPE_TYPE_NAME } from './default_configration';
 import defaultConfig from './default_configration';
@@ -40,17 +41,11 @@ class XHR {
     });
   }
   normalizeQuery() {
-    let res = '';
-    let reg = /^(\S+?)(\?\S*)?$/;
+    let reg = /^(\S+?)(\?(\S*))?$/;
     let urlInfo = reg.exec(this.url);
     let path = urlInfo[1];
-    let query = urlInfo[2];
-
-    if (this.method.toLowerCase() === 'get') {
-      res = encodeQuery(this.query);
-    }
-    res = query && query.length > 1 ? query + '&' + res : '?' + res;
-    return path + res;
+    let query = encodeQuery(extend(decodeQuery(urlInfo[3]), this.query));
+    return path + (query ? '?' + query : '');
   }
   normalizeBody() {
     let result = '',

@@ -14,7 +14,6 @@ let defaultConfig = {
   user: undefined,
   password: undefined,
   headers: {
-    DEFAULT_CONTYPE_TYPE_NAME: MIME.JSON,
     Accept: `${MIME.JSON}, ${MIME.TEXT}, ${MIME.ANY}`
   },
   withCredentials: undefined,
@@ -23,5 +22,5 @@ let defaultConfig = {
   data: {},
   query: {}
 };
-
+defaultConfig.headers[DEFAULT_CONTYPE_TYPE_NAME] = MIME.JSON;
 export default defaultConfig;
