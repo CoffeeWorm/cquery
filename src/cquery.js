@@ -1,6 +1,9 @@
 import ajax from './xhr/ajax';
 import isUtil from './lib/isutil';
 import extend from './lib/extend';
+import html from './lib/html';
+import throttle from './lib/throttle';
+import debounce from './lib/debounce';
 import toString from './lib/tostring';
 
 let _ = {
@@ -84,7 +87,10 @@ let _ = {
   toStr: toString,
   ajax,
   extend,
-  ...isUtil
+  ...isUtil,
+  ...html,
+  ...throttle,
+  debounce
 };
 
 export default _;
