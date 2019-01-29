@@ -5,10 +5,20 @@ export const MIME = {
   TEXT: 'text/plain',
   ANY: '*/*'
 };
-
+export const HTTP_METHOD = [
+  'get',
+  'post',
+  'put',
+  'delete',
+  'patch',
+  'head',
+  'connect',
+  'options',
+  'trace'
+];
 let defaultConfig = {
   url: '',
-  method: 'GET',
+  method: HTTP_METHOD[1],
   async: true,
   responseType: 'json',
   user: undefined,

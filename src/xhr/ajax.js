@@ -1,10 +1,19 @@
 import XHR from './xhr';
-import isSupportUpload from '../lib/isSupportXHRUpload';
-let ajax = function(config) {
+import isUtil from '../lib/isutil';
+import isSupportUpload from '../lib/issupportxhrupload';
+import { HTTP_METHOD } from './default_configration';
+
+let ajax = function(url, config = {}) {
+  if (isUtil.isString(url)) {
+    config.url = url;
+  }
+  if (isUtil.isObject(url)) {
+    config = url;
+  }
   return new XHR(config);
 };
 
-['get', 'post', 'put', 'patch', 'delete'].forEach(method => {
+HTTP_METHOD.forEach(method => {
   ajax[method] = (url = '/', config = {}) => {
     config.method = method;
     config.url = url;
@@ -12,4 +21,5 @@ let ajax = function(config) {
   };
 });
 ajax.isSupportUpload = isSupportUpload;
+
 export default ajax;
