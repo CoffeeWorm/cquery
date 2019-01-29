@@ -7,7 +7,8 @@ const types = [
   'Boolean',
   'Null',
   'Undefined',
-  'Symbol'
+  'Symbol',
+  'FormData'
 ];
 const isUtil = {};
 types.forEach(type => {

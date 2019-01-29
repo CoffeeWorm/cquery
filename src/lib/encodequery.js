@@ -6,9 +6,9 @@ export default function encodeQuery(obj) {
   }
   let result = [];
   Object.keys(obj).forEach(item => {
-    let str = !isUtil.isUndefined(obj[item])
-      ? `${encodeURI(item)}=${encodeURI(obj[item])}`
-      : `${encodeURI(item)}`;
+    let str = `${encodeURIComponent(item)}=${
+      isUtil.isUndefined(obj[item]) ? '' : encodeURIComponent(obj[item])
+    }`;
     result.push(str);
   });
   return result.join('&');

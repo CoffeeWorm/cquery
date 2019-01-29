@@ -6,7 +6,8 @@ import extend from '../lib/extend';
 import { DEFAULT_CONTYPE_TYPE_NAME } from './default_configration';
 import defaultConfig from './default_configration';
 import { MIME } from './default_configration';
-import isSupportXHRUpload from '../lib/isSupportXHRUpload';
+import isSupportXHRUpload from '../lib/issupportxhrupload';
+import isURLSearchParams from '../lib/isurlsearchparams';
 class XHR {
   /**
    * constructor
@@ -52,16 +53,34 @@ class XHR {
       data = this.data;
     let contentType = this.headers[DEFAULT_CONTYPE_TYPE_NAME];
 
-    switch (true) {
-      case new RegExp(MIME.JSON).test(contentType):
-        result = JSON.stringify(data);
-        break;
-      case new RegExp(MIME.URL_ENCODE).test(contentType):
-        result = encodeQuery(data);
-        break;
-      default:
-        result = data;
-        break;
+    if (contentType) {
+      switch (true) {
+        case new RegExp(MIME.JSON).test(contentType):
+          result = JSON.stringify(data);
+          break;
+        case new RegExp(MIME.URL_ENCODE).test(contentType):
+          result = encodeQuery(data);
+          break;
+        default:
+          result = data;
+          break;
+      }
+    }
+    if (!contentType) {
+      switch (true) {
+        case isUtil.isObject(data):
+          result = JSON.stringify(data);
+          this.headers[DEFAULT_CONTYPE_TYPE_NAME] = MIME.JSON;
+          break;
+        case isURLSearchParams(data):
+          this.headers[DEFAULT_CONTYPE_TYPE_NAME] = MIME.URL_ENCODE;
+          result = data.toString();
+          break;
+        case isUtil.isFormData(data):
+        default:
+          result = data;
+          break;
+      }
     }
     return result;
   }
