@@ -16,20 +16,22 @@ export const HTTP_METHOD = [
   'options',
   'trace'
 ];
-let defaultConfig = {
-  url: '',
-  method: HTTP_METHOD[1],
-  async: true,
-  responseType: 'json',
-  user: undefined,
-  password: undefined,
-  headers: {
-    Accept: `${MIME.JSON}, ${MIME.TEXT}, ${MIME.ANY}`
-  },
-  withCredentials: undefined,
-  onDownloadProgress: undefined,
-  onUploadProgress: undefined,
-  data: {},
-  query: {}
-};
-export default defaultConfig;
+class DefaultConfig {
+  constructor() {
+    this.url = '';
+    this.method = HTTP_METHOD[0];
+    this.async = true;
+    this.responseType = 'json';
+    this.user = undefined;
+    this.password = undefined;
+    this.headers = {
+      Accept: `${MIME.JSON}, ${MIME.TEXT}, ${MIME.ANY}`
+    };
+    this.withCredentials = undefined;
+    this.onDownloadProgress = undefined;
+    this.onUploadProgress = undefined;
+    this.data = {};
+    this.query = {};
+  }
+}
+export default DefaultConfig;

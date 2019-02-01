@@ -4,7 +4,7 @@ import encodeQuery from '../lib/encodequery';
 import decodeQuery from '../lib/decodequery';
 import extend from '../lib/extend';
 import { DEFAULT_CONTYPE_TYPE_NAME } from './default_configration';
-import defaultConfig from './default_configration';
+import DefaultConfig from './default_configration';
 import { MIME } from './default_configration';
 import isSupportXHRUpload from '../lib/issupportxhrupload';
 import isURLSearchParams from '../lib/isurlsearchparams';
@@ -23,7 +23,7 @@ class XHR {
     if (!isUtil.isString(config.url) && config.url.length < 1) {
       throw new Error('Request url in XMLHttpRequert configuration.');
     }
-    extend(this, defaultConfig, config);
+    extend(this, new DefaultConfig(), config);
 
     normalizeProperty(this.headers, DEFAULT_CONTYPE_TYPE_NAME);
     this.xhr = new XMLHttpRequest();
@@ -69,6 +69,7 @@ class XHR {
     if (!contentType) {
       switch (true) {
         case isUtil.isObject(data):
+        case isUtil.isArray(data):
           result = JSON.stringify(data);
           this.headers[DEFAULT_CONTYPE_TYPE_NAME] = MIME.JSON;
           break;
