@@ -9,7 +9,6 @@
     "test-server": "node ./test/server.js",
     "builddev": "webpack --config webpack.config.js --mode=development",
     "build": "webpack --config webpack.config.js --mode=production",
-    "dev": "node ./test/server.js",
     "lint": "eslint --ext .js ./src/",
     "lint-fix": "eslint --fix .js ./src/"
   },
