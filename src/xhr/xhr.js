@@ -26,6 +26,7 @@ class XHR {
     extend(this, new DefaultConfig(), config);
 
     normalizeProperty(this.headers, DEFAULT_CONTYPE_TYPE_NAME);
+    this.setContentType();
     this.xhr = new XMLHttpRequest();
     return new Promise((rel, rej) => {
       this.xhr.onreadystatechange = this.onreadystatechange(rel);
@@ -41,6 +42,25 @@ class XHR {
         .send();
     });
   }
+  setContentType() {
+    let contentType = this.headers[DEFAULT_CONTYPE_TYPE_NAME],
+      data = this.data;
+    if (contentType) {
+      return;
+    }
+    switch (true) {
+      case isUtil.isObject(data):
+      case isUtil.isArray(data):
+        this.headers[DEFAULT_CONTYPE_TYPE_NAME] = MIME.JSON;
+        break;
+      case isURLSearchParams(data):
+        this.headers[DEFAULT_CONTYPE_TYPE_NAME] = MIME.URL_ENCODE;
+        break;
+      case isUtil.isFormData(data):
+      default:
+        break;
+    }
+  }
   normalizeQuery() {
     let reg = /^(\S+?)(\?(\S*))?$/;
     let urlInfo = reg.exec(this.url);
@@ -53,36 +73,18 @@ class XHR {
       data = this.data;
     let contentType = this.headers[DEFAULT_CONTYPE_TYPE_NAME];
 
-    if (contentType) {
-      switch (true) {
-        case new RegExp(MIME.JSON).test(contentType):
-          result = JSON.stringify(data);
-          break;
-        case new RegExp(MIME.URL_ENCODE).test(contentType):
-          result = encodeQuery(data);
-          break;
-        default:
-          result = data;
-          break;
-      }
+    switch (true) {
+      case new RegExp(MIME.JSON).test(contentType):
+        result = JSON.stringify(data);
+        break;
+      case new RegExp(MIME.URL_ENCODE).test(contentType):
+        result = encodeQuery(data);
+        break;
+      default:
+        result = data;
+        break;
     }
-    if (!contentType) {
-      switch (true) {
-        case isUtil.isObject(data):
-        case isUtil.isArray(data):
-          result = JSON.stringify(data);
-          this.headers[DEFAULT_CONTYPE_TYPE_NAME] = MIME.JSON;
-          break;
-        case isURLSearchParams(data):
-          this.headers[DEFAULT_CONTYPE_TYPE_NAME] = MIME.URL_ENCODE;
-          result = data.toString();
-          break;
-        case isUtil.isFormData(data):
-        default:
-          result = data;
-          break;
-      }
-    }
+
     return result;
   }
   onreadystatechange(rel) {
