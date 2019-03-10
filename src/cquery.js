@@ -11,7 +11,7 @@ import $ from './lib/$';
 import html2node from './lib/html2node';
 import klass from './lib/klass';
 import timeformat from './lib/timeformat';
-
+import cloneDeep from './lib/extenddeep';
 function cquery(selector, node) {
   return $(selector, node);
 }
@@ -25,6 +25,7 @@ let util = {
   debounce,
   decodeQuery,
   encodeQuery,
+  cloneDeep,
   ...klass,
   ...isUtil,
   ...html,
