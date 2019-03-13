@@ -129,7 +129,7 @@ class XHR {
   }
   open() {
     this.xhr.open(
-      this.method,
+      this.method.toUpperCase(),
       this.normalizeQuery(),
       this.async,
       this.user,
