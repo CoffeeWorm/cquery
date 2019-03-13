@@ -2,9 +2,14 @@
   "name": "cquery",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "",
+  "author": {
+    "name": "CoffeeWorm",
+    "email": "coffee_worm@163.com",
+    "url": "https://github.com/coffeeworm"
+  },
   "license": "MIT",
-  "description": "",
+  "repository": "https://github.com/CoffeeWorm/cquery.git",
+  "description": "A browser tools set.",
   "scripts": {
     "test-server": "node ./test/server.js",
     "builddev": "webpack --config webpack.config.js --mode=development",
@@ -28,6 +33,10 @@
     "webpack": "^4.28.2",
     "webpack-cli": "^3.1.2"
   },
+  "files": [
+    "/dist",
+    "/src"
+  ],
   "browserList": [
     "> 1%",
     "not ie < 8"
