@@ -5,6 +5,8 @@ import html from './lib/html';
 import throttle from './lib/throttle';
 import debounce from './lib/debounce';
 import toStr from './lib/tostring';
+import eventBus, { EventBus } from './lib/even-bus';
+import LocalStorageUtil, { ls } from './lib/ls';
 import decodeQuery from './lib/decodequery';
 import encodeQuery from './lib/encodequery';
 import $ from './lib/$';
@@ -26,6 +28,10 @@ let util = {
   decodeQuery,
   encodeQuery,
   cloneDeep,
+  EventBus,
+  eventBus,
+  ls,
+  LocalStorageUtil,
   ...klass,
   ...isUtil,
   ...html,
