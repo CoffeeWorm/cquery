@@ -32,6 +32,26 @@ import ajax from 'cquery/src/xhr/ajax';
 ```html
 <script src="<你下载的路径>/dist/cquery[.min].js"></script>
 ```
+## polyfill
+
+当你直接引用打包后的文件时，已经对浏览器做过兼容。而当你使用ES module的方式时，由于引用的文件没有使用Babel处理，需要在你的项目webpack配置中添加相关配置，如：
+```javascript
+module: {
+  rules:[
+    {
+      test: /\.js(x?)$/
+      include: [/src/, /node_modules\/cuqery/],
+      use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            plugins: ['@babel/plugin-transform-runtime']
+          }
+        }
+    }
+  ]
+}
+```
 
 ## 包含方法
 
