@@ -1,4 +1,5 @@
 # cquery
+![build](https://travis-ci.org/CoffeeWorm/cquery.svg?branch=master)
 
 cquery 是一个浏览器端工具集。其集我毕生绝学（其实也就一年(=￣ ω ￣=)），包含了很多前端常用方法。
 
