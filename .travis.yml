@@ -1,12 +1,13 @@
 language: node_js
 
-node_js: - 'lts/*'
+node_js:
+  - 'lts/*'
 
 branches:
   only:
     - master
     - dev
-    - /^feature-.+$/i
+    - /(?i)^feature\/\S+$/
 
 before_install: npm install -g npm
 
